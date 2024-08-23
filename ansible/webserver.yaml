@@ -1,0 +1,21 @@
+- name: Installing webserver application
+  hosts: localhost
+  become: yes
+  tasks:
+  - name: Downloading webserver
+    ansible.builtin.dnf:
+      name: nginx
+      state: present
+  - name: remove default nginx page
+    ansible.builtin.file:
+      path: /user/share/nginx/html
+      state: absent
+  - name: COPY CUSTOM nginx page
+    ansible.builtin.copy:
+      src: index.html
+      dest: /user/share/nginx/html
+  - name: Starting webserver
+    ansible.builtin.service:
+      name: nginx
+      state: started
+      enabled: yes
