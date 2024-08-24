@@ -2,11 +2,11 @@
   hosts: localhost
   become: yes
   tasks:
-  - name: Downloading webserver
+  - name: Downloading webserver Nginx
     ansible.builtin.dnf:
       name: nginx
       state: present
-  - name: remove default nginx page
+  - name: remove default html directory
     ansible.builtin.file:
       path: /user/share/nginx/html
       state: absent
@@ -18,7 +18,7 @@
     ansible.builtin.copy:
       src: index.html
       dest: /usr/share/nginx/html
-  - name: Starting webserver
+  - name: Starting and enabling nginx
     ansible.builtin.service:
       name: nginx
       state: started
