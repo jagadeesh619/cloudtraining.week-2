@@ -1,0 +1,106 @@
+Jagadeeshwar@LAPTOP-PU2FEJCR MINGW64 /e/Aviva_cloud_training/WEEK-2/AWS/01-VPC (main)
+$ terraform apply -auto-approve
+Acquiring state lock. This may take a few moments...
+aws_eip.eip: Refreshing state... [id=eipalloc-03ce44d72af7ed57c]
+aws_vpc.aws-week-2: Refreshing state... [id=vpc-0e8ea713ee66974c4]
+aws_security_group.allow_ec2-public-private: Refreshing state... [id=sg-04e1c412b2d32bf31]
+aws_subnet.week-2-private: Refreshing state... [id=subnet-05badd5bd99c172d9]
+aws_security_group.allow_ssh: Refreshing state... [id=sg-0b5fdb0b8b2db0524]
+aws_internet_gateway.igw: Refreshing state... [id=igw-06c9dcfb3bcc5e158]
+aws_subnet.week-2-public: Refreshing state... [id=subnet-012c9c9491b63b10f]
+aws_nat_gateway.week-2: Refreshing state... [id=nat-089d1bbedb38ba3b3]
+aws_route_table.week-2-public: Refreshing state... [id=rtb-097622c14d585c818]
+aws_security_group_rule.allow_public: Refreshing state... [id=sgrule-48042064]
+aws_security_group_rule.allow_public_private: Refreshing state... [id=sgrule-4244916607]
+aws_instance.week2-public: Refreshing state... [id=i-0592a3550ac14cd84]
+aws_instance.week2-private: Refreshing state... [id=i-00ef34045838f0dea]
+aws_route_table_association.week2-public: Refreshing state... [id=rtbassoc-0373cee1505f9df25]
+aws_route_table.week-2-private: Refreshing state... [id=rtb-075b769d9ffc023cd]
+aws_route_table_association.week2-private: Refreshing state... [id=rtbassoc-0fa67f1a111f1b0b8]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:    
+  + create
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_route_table.week-2-private will be updated in-place
+  ~ resource "aws_route_table" "week-2-private" {
+        id               = "rtb-075b769d9ffc023cd"
+      ~ route            = [
+          - {
+              - carrier_gateway_id         = ""
+              - cidr_block                 = "0.0.0.0/0"
+              - core_network_arn           = ""
+              - destination_prefix_list_id = ""
+              - egress_only_gateway_id     = ""
+              - gateway_id                 = ""
+              - ipv6_cidr_block            = ""
+              - local_gateway_id           = ""
+              - nat_gateway_id             = "nat-089d1bbedb38ba3b3"
+              - network_interface_id       = ""
+              - transit_gateway_id         = ""
+              - vpc_endpoint_id            = ""
+              - vpc_peering_connection_id  = ""
+            },
+          + {
+              + carrier_gateway_id         = ""
+              + cidr_block                 = "0.0.0.0/0"
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + gateway_id                 = "nat-089d1bbedb38ba3b3"
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+        tags             = {
+            "Name" = "week2-private-route-table"
+        }
+        # (5 unchanged attributes hidden)
+    }
+
+  # aws_security_group_rule.egress_from_private will be created
+  + resource "aws_security_group_rule" "egress_from_private" {
+      + from_port                = 0
+      + id                       = (known after apply)
+      + protocol                 = "-1"
+      + security_group_id        = "sg-04e1c412b2d32bf31"
+      + security_group_rule_id   = (known after apply)
+      + self                     = false
+      + source_security_group_id = "sg-0b5fdb0b8b2db0524"
+      + to_port                  = 0
+      + type                     = "egress"
+    }
+
+  # aws_security_group_rule.egress_from_public will be created
+  + resource "aws_security_group_rule" "egress_from_public" {
+      + cidr_blocks              = [
+          + "0.0.0.0/0",
+        ]
+      + from_port                = 0
+      + id                       = (known after apply)
+      + protocol                 = "-1"
+      + security_group_id        = "sg-0b5fdb0b8b2db0524"
+      + security_group_rule_id   = (known after apply)
+      + self                     = false
+      + source_security_group_id = (known after apply)
+      + to_port                  = 0
+      + type                     = "egress"
+    }
+
+Plan: 2 to add, 1 to change, 0 to destroy.
+aws_security_group_rule.egress_from_private: Creating...
+aws_route_table.week-2-private: Modifying... [id=rtb-075b769d9ffc023cd]
+aws_security_group_rule.egress_from_public: Creating...
+aws_route_table.week-2-private: Modifications complete after 2s [id=rtb-075b769d9ffc023cd]
+aws_security_group_rule.egress_from_private: Creation complete after 2s [id=sgrule-970557450]
+aws_security_group_rule.egress_from_public: Creation complete after 2s [id=sgrule-1191840958]
+Releasing state lock. This may take a few moments...
+
+Apply complete! Resources: 2 added, 1 changed, 0 destroyed.
