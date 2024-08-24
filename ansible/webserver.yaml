@@ -10,10 +10,14 @@
     ansible.builtin.file:
       path: /user/share/nginx/html
       state: absent
+  - name: creating new html directory
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: directory
   - name: COPY CUSTOM nginx page
     ansible.builtin.copy:
       src: index.html
-      dest: /user/share/nginx/html
+      dest: /usr/share/nginx/html
   - name: Starting webserver
     ansible.builtin.service:
       name: nginx
