@@ -1,0 +1,1 @@
+public object url : https://s3.amazonaws.com/aws.week2.cloudtraining/public-test-object-file.txt
